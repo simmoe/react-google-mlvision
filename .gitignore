@@ -1,2 +1,3 @@
 ./src/config/constants.js
+src/config/*
 node_modules
