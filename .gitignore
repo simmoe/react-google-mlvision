@@ -1,2 +1,2 @@
-myConfigFile
+./src/config/constants.js
 node_modules
