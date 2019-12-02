@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Baskervville&display=swap');
+body, html{
+  margin:0;
+  font-family: 'Baskervville';
+  font-weight:400;
+}
+
+
+.home{
+  width:100vw;
+  height:100vh;
+  display:grid;
+  place-items:center;
+  position:relative;
+}
+
+main{
+  display:grid;
+  width:100vw;
+  padding: 15vh 0 15vh 0;
+  grid-template-columns: repeat(2, 1fr);
+  align-items:start;
+}
+
+.my-photos{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding-top:2rem;
+  justify-content:start;
+  gap:1rem;
+  padding:1rem;
+}
+
+.home .my-photos img{
+  width:8vw;
+  height:8vw;
+  border-radius:50%;
+  object-fit: cover;
+}
+
+.photo{
+  display:grid;
+}
+
+.photo svg{
+  fill:black;
+  width:100%;
+  margin-top:1rem;
+  text-align:center;
+  cursor: pointer;
+}
+
+.similarImagesDiv{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(25vw, 1fr));
+  gap:0;
+}
+
+.similar img{
+  width:25vw;
+  height:25vw;
+  object-fit: cover;
+}
+
+.similar .hide{
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background-color:#4285F4;
+}
+
+.header{
+  position:fixed;
+  height:4rem;
+  background:white;
+  width:100vw;
+  top:0;
+  left:0;
+  display:grid;
+  grid-auto-flow:column;
+  justify-content:center;
+  align-items:center;
+  padding:2rem;
+  gap:2rem;
+}
+
+.header h1, .header p{
+  margin:0;
+  padding:0;
+}
