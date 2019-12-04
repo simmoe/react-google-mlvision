@@ -1,14 +1,14 @@
 import React, {useState, useEffect, useRef} from 'react'
 import firebase from 'firebase'
 import FileUploader from 'react-firebase-file-uploader'
-import {FaCameraRetro, FaTrashAlt} from "react-icons/fa"
+import {FaCameraRetro, FaTrashAlt, FaCubes, FaTag} from "react-icons/fa"
 import Similar from './Similar'
+import Label from './Label'
 import {ScaleLoader} from 'react-spinners'
 import config from '../config/constants'
 
 //init firebase
 firebase.initializeApp(config);
-
 
 const Home = (props) => {
 
@@ -20,6 +20,9 @@ const Home = (props) => {
 
     const [similar,
         setSimilar] = useState([])
+
+    const [labels,
+        setLabels] = useState([])
 
     //upload functions
     const photosDiv = useRef()
@@ -109,6 +112,10 @@ const Home = (props) => {
     // the additional argument [similar] makes useEfeect run only when some value is
     // set - here, the state variable similar
 
+    const takeMeAway = (url) => {
+        setSimilar(similar.filter((b) => b.url !== url))
+    }
+
     return (
         <div className='home'>
             <div className='header'>
@@ -118,31 +125,31 @@ const Home = (props) => {
                 </div>
                 <div className="loader">
                     <label>
-                        <FaCameraRetro size={44}/>
+                        <FaCameraRetro title='upload new' className="upload-icon" size={32}/>
                         <FileUploader
-                        hidden
-                        accept="image/*"
-                        storageRef={firebase
-                        .storage()
-                        .ref('images')}
-                        onUploadStart={handleUploadStart}
-                        onUploadError={handleUploadError}
-                        onUploadSuccess={handleUploadSuccess}
-                        onProgress={handleProgress}/>
+                            hidden
+                            accept="image/*"
+                            storageRef={firebase
+                            .storage()
+                            .ref('images')}
+                            onUploadStart={handleUploadStart}
+                            onUploadError={handleUploadError}
+                            onUploadSuccess={handleUploadSuccess}
+                            onProgress={handleProgress}/>
                     </label>
                 </div>
-            </div> 
-            <main> 
+            </div>
+            <main>
                 <div className='my-photos' ref={photosDiv}>
                     {allPhotos.map((photo, i) => {
                         return (
                             <div key={i} className='photo'>
-                                <img
-                                    onClick={() => setSimilar(photo.similarImages)}
-                                    key={i}
-                                    src={photo.url}
-                                    alt={photo.id}/>
-                                <FaTrashAlt onClick= { () => deletePhoto(photo) }/>
+                                <img key={i} src={photo.url} alt={photo.id}/>
+                                <div className="icons">
+                                    <FaCubes title="view similar" onClick={() => setSimilar(photo.similarImages)}/>
+                                    <FaTag title="view labels" onClick={() => setLabels(photo.labels)}/>
+                                    <FaTrashAlt title="delete photo" onClick= { () => deletePhoto(photo) }/>
+                                </div>
                             </div>
                         )
                     })}
@@ -151,8 +158,10 @@ const Home = (props) => {
                         : ''}
                 </div>
                 <div className="similarImagesDiv">
-                    {similar.map((photo, i) => <Similar key={i} image={photo}/>)}
+                    {labels.length > 0 && labels.map((label, i) => <Label key={i} label={label}/>)}
+                    {similar.length > 0 && similar.map((photo, i) => <Similar takeMeAway={takeMeAway} key={i} image={photo}/>)}
                 </div>
+
             </main>
         </div>
     )

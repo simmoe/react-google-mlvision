@@ -20,15 +20,21 @@ main{
   padding: 15vh 0 15vh 0;
   grid-template-columns: repeat(2, 1fr);
   align-items:start;
+  padding-left:2rem;
 }
 
+.upload-icon{
+  cursor: pointer;
+}
 .my-photos{
   display:grid;
   grid-template-columns: repeat(3, 1fr);
   padding-top:2rem;
   justify-content:start;
+  align-items: center;
   gap:1rem;
   padding:1rem;
+  min-height:80vh;
 }
 
 .home .my-photos img{
@@ -50,6 +56,11 @@ main{
   cursor: pointer;
 }
 
+.icons{
+  display:flex;
+  width:20%;
+}
+
 .similarImagesDiv{
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(25vw, 1fr));
@@ -57,16 +68,9 @@ main{
 }
 
 .similar img{
-  width:25vw;
+    width:25vw;
   height:25vw;
   object-fit: cover;
-}
-
-.similar .hide{
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  background-color:#4285F4;
 }
 
 .header{
